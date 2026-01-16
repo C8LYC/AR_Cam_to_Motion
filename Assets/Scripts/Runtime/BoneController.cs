@@ -160,7 +160,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 if (bone != null)
                 {
                     bone.transform.localPosition = joint.localPose.position;
-                    bone.transform.localRotation = m_InitialRotations[i] * joint.localPose.rotation;
+                    //bone.transform.localRotation = m_InitialRotations[i] * joint.localPose.rotation;
+                    bone.transform.localRotation = joint.localPose.rotation;
                 }
             }
         }

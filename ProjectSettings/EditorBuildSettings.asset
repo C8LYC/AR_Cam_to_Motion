@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/BodyTracking/HumanBodyTracking3D/HumanBodyTracking3D.unity
+    path: Assets/Scenes/BodyTracking/HumanBodyTracking3D/Self_Test_HumanBodyTracking3D.unity
     guid: 9fc1f5ed98d414310a8b9e659c295d7c
   m_configObjects:
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 0ab6ea2816a634324b4fc36c3087bca9, type: 2}
