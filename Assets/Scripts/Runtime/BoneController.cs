@@ -109,6 +109,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField]
         [Tooltip("The root bone of the skeleton.")]
         Transform m_SkeletonRoot;
+        Quaternion[] m_InitialRotations = new Quaternion[k_NumSkeletonJoints];
 
         /// <summary>
         /// Get/Set the root bone of the skeleton.
@@ -159,7 +160,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 if (bone != null)
                 {
                     bone.transform.localPosition = joint.localPose.position;
-                    bone.transform.localRotation = joint.localPose.rotation;
+                    bone.transform.localRotation = m_InitialRotations[i] * joint.localPose.rotation;
                 }
             }
         }
@@ -170,6 +171,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (index >= 0 && index < k_NumSkeletonJoints)
             {
                 m_BoneMapping[index] = joint;
+                // 紀錄模型原本在 T-Pose 時的旋轉
+                m_InitialRotations[index] = joint.localRotation;
             }
             else
             {
