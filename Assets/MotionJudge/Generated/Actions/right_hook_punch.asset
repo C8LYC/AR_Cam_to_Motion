@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac62d8a931fdad4eb065f88553730a2, type: 3}
+  m_Name: right_hook_punch
+  m_EditorClassIdentifier: 
+  actionName: right_hook_punch
+  IsActive: 1
+  motionStates:
+  - {fileID: 11400000, guid: db9cd0ceaf198c24890e584a016b50bf, type: 2}
+  - {fileID: 11400000, guid: bf7e53b297bc13d4c995b41ff1096600, type: 2}
+  - {fileID: 11400000, guid: db1fe77dfd3c56d4db160cc8a3a05c74, type: 2}

@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd80734d73c5b8f4a91b8b928f6fa30c, type: 3}
+  m_Name: ready
+  m_EditorClassIdentifier: 
+  stateName: ready
+  conditions:
+  - rid: 4767182644116979845
+  - rid: 4767182644116979846
+  - rid: 4767182644116979847
+  - rid: 4767182644116979848
+  exit_time: 1.5
+  hold_time: 4.5
+  nextStateIndexs: 02000000
+  references:
+    version: 2
+    RefIds:
+    - rid: 4767182644116979845
+      type: {class: AngleCondition, ns: , asm: Assembly-CSharp}
+      data:
+        skeletonRoot: {fileID: 0}
+        startJoint: 2
+        middleJoint: 3
+        endJoint: 4
+        minAngle: 110
+        maxAngle: 180
+    - rid: 4767182644116979846
+      type: {class: AngleCondition, ns: , asm: Assembly-CSharp}
+      data:
+        skeletonRoot: {fileID: 0}
+        startJoint: 7
+        middleJoint: 8
+        endJoint: 9
+        minAngle: 110
+        maxAngle: 180
+    - rid: 4767182644116979847
+      type: {class: AngleCondition, ns: , asm: Assembly-CSharp}
+      data:
+        skeletonRoot: {fileID: 0}
+        startJoint: 3
+        middleJoint: 2
+        endJoint: 19
+        minAngle: 120
+        maxAngle: 180
+    - rid: 4767182644116979848
+      type: {class: AngleCondition, ns: , asm: Assembly-CSharp}
+      data:
+        skeletonRoot: {fileID: 0}
+        startJoint: 8
+        middleJoint: 7
+        endJoint: 63
+        minAngle: 120
+        maxAngle: 180

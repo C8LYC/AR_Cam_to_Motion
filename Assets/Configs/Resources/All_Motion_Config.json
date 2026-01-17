@@ -1,0 +1,2529 @@
+{
+    "description": "Motion to Game Input Mapping - v2.4 with loop-ready triggers",
+    "version": "2.4",
+    "actions": [
+        {
+            "action_name": "shoulder_press",
+            "description": "Shoulder press with three states",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 40,
+                            "max_angle": 100
+                        },
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 40,
+                            "max_angle": 100
+                        }
+                    ],
+                    "position_conditions": [
+                        {
+                            "point1": 15,
+                            "point2": 13,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.0
+                        },
+                        {
+                            "point1": 16,
+                            "point2": 14,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.0
+                        }
+                    ],
+                    "next_states": [
+                        "press_up"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 4.5
+                },
+                "press_up": {
+                    "state_name": "press_up",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 100,
+                            "max_angle": 140
+                        },
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 100,
+                            "max_angle": 140
+                        }
+                    ],
+                    "position_conditions": [
+                        {
+                            "point1": 15,
+                            "point2": 11,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.0
+                        },
+                        {
+                            "point1": 16,
+                            "point2": 12,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.0
+                        }
+                    ],
+                    "next_states": [
+                        "extended"
+                    ],
+                    "exit_time": 1.0,
+                    "input_actions": [],
+                    "hold_time": 3.0
+                },
+                "extended": {
+                    "state_name": "extended",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 140,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 140,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [
+                        {
+                            "point1": 15,
+                            "point2": 11,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.0
+                        },
+                        {
+                            "point1": 16,
+                            "point2": 12,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.0
+                        }
+                    ],
+                    "next_states": [
+                        "ready"
+                    ],
+                    "exit_time": 1.0,
+                    "input_actions": [
+                        "key_press:c"
+                    ],
+                    "hold_time": 3.0
+                }
+            }
+        },
+        {
+            "action_name": "boxing_guard",
+            "description": "Boxing guard: both forearms up near head (wrists above shoulders, elbows bent)",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": ["guard"],
+                    "exit_time": 2.0,
+                    "input_actions": [],
+                    "hold_time": 6.0
+                },
+                "guard": {
+                    "state_name": "guard",
+                    "angle_conditions": [
+                        { "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",  "min_angle": 40,  "max_angle": 120 },
+                        { "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12", "min_angle": 40,  "max_angle": 120 },
+                        { "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13",      "min_angle": 10,  "max_angle": 120 },
+                        { "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14",   "min_angle": 10,  "max_angle": 120 }
+                    ],
+                    "position_conditions": [
+                        { "point1": 15, "point2": 11, "axis": "y", "comparison": "less",    "threshold": 0.0 },
+                        { "point1": 16, "point2": 12, "axis": "y", "comparison": "less",    "threshold": 0.0 },
+                        { "point1": 15, "point2": 11, "axis": "x", "comparison": "greater", "threshold": 0.0 },
+                        { "point1": 16, "point2": 12, "axis": "x", "comparison": "less",    "threshold": 0.0 }
+                    ],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": ["ready"],
+                    "exit_time": 0.25,
+                    "input_actions": [],
+                    "hold_time": 0.75
+                }
+            }
+        },
+        {
+            "action_name": "both_arms_side_T_loop",
+            "description": "Both arms horizontal raise (T-pose-ish) with initial trigger, then loop for tap + long-press outputs.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": ["trigger"],
+                    "exit_time": 1.0,
+                    "input_actions": [],
+                    "hold_time": 3.0
+                },
+                "trigger": {
+                    "state_name": "trigger",
+                    "angle_conditions": [
+                        { "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",  "min_angle": 140, "max_angle": 180 },
+                        { "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12", "min_angle": 140, "max_angle": 180 },
+                        { "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13",      "min_angle": 70,  "max_angle": 130 },
+                        { "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14",   "min_angle": 70,  "max_angle": 130 }
+                    ],
+                    "position_conditions": [
+                        { "point1": 15, "point2": 11, "axis": "x", "comparison": "greater", "threshold": 0.02 },
+                        { "point1": 16, "point2": 12, "axis": "x", "comparison": "less",    "threshold": -0.02 }
+                    ],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": ["loop"],
+                    "exit_time": 0.6,
+                    "input_actions": [],
+                    "hold_time": 2.0
+                },
+                "loop": {
+                    "state_name": "loop",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "loop": {
+                        "enabled": true,
+                        "duration_seconds": 9999.0,
+                        "allowed_gap_seconds": 0.7,
+                        "groups": [
+                            {
+                                "angle_conditions": [
+                                    { "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",  "min_angle": 140, "max_angle": 180 },
+                                    { "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12", "min_angle": 140, "max_angle": 180 },
+                                    { "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13",      "min_angle": 70,  "max_angle": 130 },
+                                    { "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14",   "min_angle": 70,  "max_angle": 130 }
+                                ],
+                                "position_conditions": [
+                                    { "point1": 15, "point2": 11, "axis": "x", "comparison": "greater", "threshold": 0.02 },
+                                    { "point1": 16, "point2": 12, "axis": "x", "comparison": "less",    "threshold": -0.02 }
+                                ],
+                                "velocity_conditions": [],
+                                "time_different_condition": [],
+                                "input_actions": [
+                                    "key_press:t"
+                                ],
+                                "cooldown_ms": 500
+                            },
+                            {
+                                "angle_conditions": [
+                                    { "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",  "min_angle": 135, "max_angle": 180 },
+                                    { "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12", "min_angle": 135, "max_angle": 180 }
+                                ],
+                                "position_conditions": [
+                                    { "point1": 15, "point2": 11, "axis": "x", "comparison": "greater", "threshold": 0.015 },
+                                    { "point1": 16, "point2": 12, "axis": "x", "comparison": "less",    "threshold": -0.015 }
+                                ],
+                                "velocity_conditions": [],
+                                "time_different_condition": [],
+                                "input_actions": [
+                                    "key_down:h:800"
+                                ],
+                                "cooldown_ms": 400
+                            }
+                        ],
+                        "fail_actions": [
+                            "key_up:h"
+                        ]
+                    },
+                    "next_states": [],
+                    "exit_time": 5000,
+                    "input_actions": [],
+                    "hold_time": 15000
+                }
+            }
+        },
+        {
+            "action_name": "left_jab",
+            "description": "Left jab: quick straight extension with light position + velocity checks",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        { "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11", "min_angle": 80, "max_angle": 180 },
+                        { "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13", "min_angle": 10, "max_angle": 120 }
+                    ],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": ["extending"],
+                    "exit_time": 2.0,
+                    "input_actions": [],
+                    "hold_time": 6.0
+                },
+                "extending": {
+                    "state_name": "extending",
+                    "angle_conditions": [
+                        { "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11", "min_angle": 90, "max_angle": 170 },
+                        { "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13", "min_angle": 20, "max_angle": 110 }
+                    ],
+                    "position_conditions": [
+                        { "point1": 15, "point2": 11, "axis": "x", "comparison": "greater", "threshold": 0.015 }
+                    ],
+                    "velocity_conditions": [
+                        { "point": 15, "axis": "x", "comparison": "greater", "threshold": 0.12, "required_time_span": 0.12 }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": ["peak"],
+                    "exit_time": 0.35,
+                    "input_actions": [],
+                    "hold_time": 1.0
+                },
+                "peak": {
+                    "state_name": "peak",
+                    "angle_conditions": [
+                        { "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11", "min_angle": 95, "max_angle": 170 },
+                        { "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13", "min_angle": 20, "max_angle": 110 }
+                    ],
+                    "position_conditions": [
+                        { "point1": 15, "point2": 11, "axis": "x", "comparison": "greater", "threshold": 0.02 }
+                    ],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [],
+                    "exit_time": 0.10,
+                    "input_actions": ["key_press:o"],
+                    "hold_time": 0.2
+                }
+            }
+        },
+        {
+            "action_name": "right_jab",
+            "description": "Right jab: quick straight extension with light position + velocity checks",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        { "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12", "min_angle": 80, "max_angle": 180 },
+                        { "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14", "min_angle": 10, "max_angle": 120 }
+                    ],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": ["extending"],
+                    "exit_time": 2.0,
+                    "input_actions": [],
+                    "hold_time": 6.0
+                },
+                "extending": {
+                    "state_name": "extending",
+                    "angle_conditions": [
+                        { "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12", "min_angle": 90, "max_angle": 170 },
+                        { "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14", "min_angle": 20, "max_angle": 110 }
+                    ],
+                    "position_conditions": [
+                        { "point1": 16, "point2": 12, "axis": "x", "comparison": "less", "threshold": -0.03 }
+                    ],
+                    "velocity_conditions": [
+                        { "point": 16, "axis": "x", "comparison": "less", "threshold": -0.18, "required_time_span": 0.12 }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": ["peak"],
+                    "exit_time": 0.35,
+                    "input_actions": [],
+                    "hold_time": 1.0
+                },
+                "peak": {
+                    "state_name": "peak",
+                    "angle_conditions": [
+                        { "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12", "min_angle": 95, "max_angle": 170 },
+                        { "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14", "min_angle": 20, "max_angle": 110 }
+                    ],
+                    "position_conditions": [
+                        { "point1": 16, "point2": 12, "axis": "x", "comparison": "less", "threshold": -0.04 }
+                    ],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [],
+                    "exit_time": 0.08,
+                    "input_actions": ["key_press:o"],
+                    "hold_time": 0.2
+                }
+            }
+        },
+        {
+            "action_name": "jumping_jacks_loop",
+            "description": "Looping jumping jacks: fires space each rep; exit if >2s gap.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-RIGHT_HIP_24",
+                            "min_angle": 100,
+                            "max_angle": 170
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-LEFT_HIP_23",
+                            "min_angle": 100,
+                            "max_angle": 170
+                        }
+                    ],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [
+                        {
+                            "point": 27,
+                            "axis": "y",
+                            "reference": "max",
+                            "comparison": "below_by",
+                            "threshold": 0.02,
+                            "window_seconds": 2.0
+                        },
+                        {
+                            "point": 28,
+                            "axis": "y",
+                            "reference": "max",
+                            "comparison": "below_by",
+                            "threshold": 0.02,
+                            "window_seconds": 2.0
+                        }
+                    ],
+                    "next_states": [
+                        "loop"
+                    ],
+                    "exit_time": 1.0,
+                    "input_actions": [],
+                    "hold_time": 3.0
+                },
+                "loop": {
+                    "state_name": "loop",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "loop": {
+                        "enabled": true,
+                        "duration_seconds": 9999.0,
+                        "allowed_gap_seconds": 0.7,
+                        "groups": [
+                            {
+                                "angle_conditions": [
+                                    {
+                                        "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-RIGHT_HIP_24",
+                                        "min_angle": 100,
+                                        "max_angle": 170
+                                    },
+                                    {
+                                        "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-LEFT_HIP_23",
+                                        "min_angle": 100,
+                                        "max_angle": 170
+                                    }
+                                ],
+                                "position_conditions": [],
+                                "velocity_conditions": [
+                                    { "point": 25, "axis": "y", "comparison": "greater", "threshold": 0.10, "required_time_span": 0.18 },
+                                    { "point": 26, "axis": "y", "comparison": "less",    "threshold": 0.05, "required_time_span": 0.18 }
+                                ],
+                                "time_different_condition": [
+                                    {
+                                        "point": 27,
+                                        "axis": "y",
+                                        "reference": "max",
+                                        "comparison": "below_by",
+                                        "threshold": 0.02,
+                                        "window_seconds": 2.0
+                                    },
+                                    {
+                                        "point": 28,
+                                        "axis": "y",
+                                        "reference": "max",
+                                        "comparison": "below_by",
+                                        "threshold": 0.02,
+                                        "window_seconds": 2.0
+                                    }
+                                ],
+                                "input_actions": [
+                                    "key_press:space"
+                                ],
+                                "cooldown_ms": 400
+                            }
+                        ],
+                        "fail_actions": []
+                    },
+                    "next_states": [],
+                    "exit_time": 5000,
+                    "input_actions": [],
+                    "hold_time": 15000
+                }
+            }
+        },
+        {
+            "action_name": "jumping_jacks",
+            "description": "Detect jumping jacks: jump + legs open (hip-knee-hip angles).",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-RIGHT_HIP_24",
+                            "min_angle": 100,
+                            "max_angle": 170
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-LEFT_HIP_23",
+                            "min_angle": 100,
+                            "max_angle": 170
+                        }
+                    ],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [
+                        {
+                            "point": 27,
+                            "axis": "y",
+                            "reference": "max",
+                            "comparison": "below_by",
+                            "threshold": 0.01,
+                            "window_seconds": 2.0
+                        },
+                        {
+                            "point": 28,
+                            "axis": "y",
+                            "reference": "max",
+                            "comparison": "below_by",
+                            "threshold": 0.01,
+                            "window_seconds": 2.0
+                        }
+                    ],
+                    "next_states": [
+                        "triggered"
+                    ],
+                    "exit_time": 1.0,
+                    "input_actions": [],
+                    "hold_time": 3.0
+                },
+                "triggered": {
+                    "state_name": "triggered",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [],
+                    "exit_time": 0.05,
+                    "input_actions": [
+                        "key_press:space"
+                    ],
+                    "hold_time": 0.15
+                }
+            }
+        },
+        {
+            "action_name": "squat",
+            "description": "A squat exercise with one-way state flow: ready to descending to complete.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 110,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 110,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 120,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 120,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "descending"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 4.5
+                },
+                "descending": {
+                    "state_name": "descending",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 70,
+                            "max_angle": 130
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 70,
+                            "max_angle": 130
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 70,
+                            "max_angle": 140
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 70,
+                            "max_angle": 140
+                        }
+                    ],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        {
+                            "point": 27,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.01,
+                            "required_time_span": 0.25
+                        },
+                        {
+                            "point": 27,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": -0.01,
+                            "required_time_span": 0.25
+                        },
+                        {
+                            "point": 28,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.01,
+                            "required_time_span": 0.25
+                        },
+                        {
+                            "point": 28,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": -0.01,
+                            "required_time_span": 0.25
+                        }
+                    ],
+                    "next_states": [
+                        "complete"
+                    ],
+                    "exit_time": 2.5,
+                    "input_actions": [],
+                    "hold_time": 7.5
+                },
+                "complete": {
+                    "state_name": "complete",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 40,
+                            "max_angle": 80
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 40,
+                            "max_angle": 80
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 40,
+                            "max_angle": 100
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 40,
+                            "max_angle": 100
+                        }
+                    ],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        {
+                            "point": 27,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.01,
+                            "required_time_span": 0.25
+                        },
+                        {
+                            "point": 27,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": -0.01,
+                            "required_time_span": 0.25
+                        },
+                        {
+                            "point": 28,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.01,
+                            "required_time_span": 0.25
+                        },
+                        {
+                            "point": 28,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": -0.01,
+                            "required_time_span": 0.25
+                        }
+                    ],
+                    "next_states": [
+                        "ready"
+                    ],
+                    "exit_time": 5.0,
+                    "input_actions": [
+                        "key_press:s"
+                    ],
+                    "hold_time": 15.0
+                }
+            }
+        },
+        {
+            "action_name": "in_place_jump",
+            "description": "Detect in-place jump by ankle Y rising above recent lowest point.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [
+                        {
+                            "point": 27,
+                            "axis": "y",
+                            "reference": "max",
+                            "comparison": "below_by",
+                            "threshold": 0.05,
+                            "window_seconds": 2.0
+                        },
+                        {
+                            "point": 28,
+                            "axis": "y",
+                            "reference": "max",
+                            "comparison": "below_by",
+                            "threshold": 0.05,
+                            "window_seconds": 2.0
+                        }
+                    ],
+                    "next_states": [
+                        "triggered"
+                    ],
+                    "exit_time": 1.0,
+                    "input_actions": [],
+                    "hold_time": 3.0
+                },
+                "triggered": {
+                    "state_name": "triggered",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [],
+                    "exit_time": 0.15,
+                    "input_actions": [
+                        "key_press:space"
+                    ],
+                    "hold_time": 0.45
+                }
+            }
+        },
+        {
+            "action_name": "tuck_jump_chest_touch",
+            "description": "彈跳碰胸動作，偵測跳躍至空中時，雙膝抬起觸碰胸部的瞬間。",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "description": "站立準備姿勢，身體直立或微蹲，準備開始下蹲起跳。",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 110,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 110,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 140,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 140,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "descending"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 45
+                },
+                "descending": {
+                    "state_name": "descending",
+                    "description": "下蹲階段，膝蓋與髖部彎曲，為跳躍蓄力。",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 70,
+                            "max_angle": 140
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 70,
+                            "max_angle": 140
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 70,
+                            "max_angle": 150
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 70,
+                            "max_angle": 160
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "tuck_complete"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 4.5
+                },
+                "tuck_complete": {
+                    "state_name": "tuck_complete",
+                    "description": "動作完成點，跳至空中，膝蓋緊縮靠近胸部。",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 25,
+                            "max_angle": 70
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 25,
+                            "max_angle": 70
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 30,
+                            "max_angle": 70
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 35,
+                            "max_angle": 80
+                        }
+                    ],
+                    "position_conditions": [],
+                    "time_different_condition": [
+                        {
+                            "point": 27,
+                            "axis": "y",
+                            "reference": "max",
+                            "comparison": "below_by",
+                            "threshold": 0.03,
+                            "window_seconds": 2.0
+                        },
+                        {
+                            "point": 28,
+                            "axis": "y",
+                            "reference": "max",
+                            "comparison": "below_by",
+                            "threshold": 0.03,
+                            "window_seconds": 2.0
+                        }
+                    ],
+                    "next_states": [
+                        "ready"
+                    ],
+                    "exit_time": 1.0,
+                    "input_actions": [
+                        "key_press:j"
+                    ],
+                    "hold_time": 3.0
+                }
+            }
+        },
+        {
+            "action_name": "left_front_kick",
+            "description": "A left front kick with revised logic to accurately detect the kick extension.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 110,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 145,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "chamber"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 4.5
+                },
+                "chamber": {
+                    "state_name": "chamber",
+                    "description": "Leg is lifted and knee is bent, preparing to kick.",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 30,
+                            "max_angle": 120
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 60,
+                            "max_angle": 150
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "kick_complete"
+                    ],
+                    "exit_time": 0.5,
+                    "input_actions": [],
+                    "hold_time": 1.5
+                },
+                "kick_complete": {
+                    "state_name": "kick_complete",
+                    "description": "Leg is fully extended forward, triggering completion.",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 70,
+                            "max_angle": 115
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 40,
+                            "max_angle": 130
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [],
+                    "exit_time": 0.05,
+                    "input_actions": [
+                        "key_press:l"
+                    ],
+                    "avoid": [
+                        "high_knee_run:loop"
+                    ],
+                    "hold_time": 0.15
+                }
+            }
+        },
+        {
+            "action_name": "right_front_kick",
+            "description": "A right front kick with three states: ready, chambering the leg, and kick completion.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 115,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 160,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "chamber"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 4.5
+                },
+                "chamber": {
+                    "state_name": "chamber",
+                    "description": "Leg is lifted and knee is bent, preparing to kick.",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 35,
+                            "max_angle": 120
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 70,
+                            "max_angle": 165
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "kick_complete"
+                    ],
+                    "exit_time": 0.5,
+                    "input_actions": [],
+                    "hold_time": 1.5
+                },
+                "kick_complete": {
+                    "state_name": "kick_complete",
+                    "description": "Leg is fully extended forward.",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 125,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-LEFT_HIP_23",
+                            "min_angle": 35,
+                            "max_angle": 100
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [],
+                    "exit_time": 0.05,
+                    "input_actions": [
+                        "key_press:k"
+                    ],
+                    "avoid": [
+                        "high_knee_run:loop"
+                    ],
+                    "hold_time": 0.15
+                }
+            }
+        },
+        {
+            "action_name": "left_straight_punch",
+            "description": "左直拳，採用精確且無重疊的兩角度條件，確保所有狀態穩定識別，無需修改程式碼。",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "description": "就緒/防禦姿態。此區間為 'ready' 專屬，由 WES 和 RHS 的初始狀態精確定義。",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 0,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13",
+                            "min_angle": 0,
+                            "max_angle": 40
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "extending"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 10
+                },
+                "extending": {
+                    "state_name": "extending",
+                    "description": "手臂前送階段。此階段的條件與 'ready' 完全分離，由 RHS 角度的變化觸發。",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 50,
+                            "max_angle": 160
+                        },
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13",
+                            "min_angle": 10,
+                            "max_angle": 120
+                        }
+                    ],
+                    "position_conditions": [
+                        {
+                            "point1": 15,
+                            "point2": 13,
+                            "axis": "x",
+                            "comparison": "less",
+                            "threshold": -0.075
+                        }
+                    ],
+                    "next_states": [
+                        "peak"
+                    ],
+                    "exit_time": 0.25,
+                    "input_actions": [],
+                    "hold_time": 1.5
+                },
+                "peak": {
+                    "state_name": "peak",
+                    "description": "完全伸展的打擊點，動作的終點。",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 90,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13",
+                            "min_angle": 70,
+                            "max_angle": 125
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [],
+                    "exit_time": 0.05,
+                    "input_actions": [
+                        "key_press:p"
+                    ],
+                    "hold_time": 0.15
+                }
+            }
+        },
+        {
+            "action_name": "right_straight_punch",
+            "description": "右直拳，採用精確且無重疊的兩角度條件，確保所有狀態穩定識別，無需修改程式碼。",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "description": "就緒/防禦姿態。此區間為 'ready' 專屬，由 WES 和 RHS 的初始狀態精確定義。",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 0,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14",
+                            "min_angle": 0,
+                            "max_angle": 30
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "extending"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 10
+                },
+                "extending": {
+                    "state_name": "extending",
+                    "description": "手臂前送階段。此階段的條件與 'ready' 完全分離，由 RHS 角度的變化觸發。",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 50,
+                            "max_angle": 120
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14",
+                            "min_angle": 10,
+                            "max_angle": 80
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "peak"
+                    ],
+                    "exit_time": 0.25,
+                    "input_actions": [],
+                    "hold_time": 1.5
+                },
+                "peak": {
+                    "state_name": "peak",
+                    "description": "完全伸展的打擊點，動作的終點。",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 120,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14",
+                            "min_angle": 80,
+                            "max_angle": 130
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [],
+                    "exit_time": 0.05,
+                    "input_actions": [
+                        "key_press:p"
+                    ],
+                    "hold_time": 0.15
+                }
+            }
+        },
+        {
+            "action_name": "left_Uppercut",
+            "description": "Left uppercut with ready->completed",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_ELBOW_13-LEFT_SHOULDER_11-LEFT_HIP_23",
+                            "min_angle": 0,
+                            "max_angle": 45
+                        },
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 0,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [
+                        {
+                            "point1": 15,
+                            "point2": 11,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": 0.0
+                        }
+                    ],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "completed"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 10
+                },
+                "completed": {
+                    "state_name": "completed",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_ELBOW_13-LEFT_SHOULDER_11-LEFT_HIP_23",
+                            "min_angle": 75,
+                            "max_angle": 140
+                        },
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 90,
+                            "max_angle": 160
+                        }
+                    ],
+                    "position_conditions": [
+                        {
+                            "point1": 0,
+                            "point2": 15,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": 0.0
+                        }
+                    ],
+                    "velocity_conditions": [
+                        {
+                            "point": 15,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.02,
+                            "required_time_span": 0.12
+                        }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "ready"
+                    ],
+                    "exit_time": 0.25,
+                    "input_actions": [
+                        "key_press:x"
+                    ],
+                    "hold_time": 0.75
+                }
+            }
+        },
+        {
+            "action_name": "right_Uppercut",
+            "description": "Right uppercut with ready->completed",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_ELBOW_14-RIGHT_SHOULDER_12-RIGHT_HIP_24",
+                            "min_angle": 0,
+                            "max_angle": 40
+                        },
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 60,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [
+                        {
+                            "point1": 16,
+                            "point2": 12,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": 0.0
+                        }
+                    ],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "completed"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 10
+                },
+                "completed": {
+                    "state_name": "completed",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_ELBOW_14-RIGHT_SHOULDER_12-RIGHT_HIP_24",
+                            "min_angle": 100,
+                            "max_angle": 160
+                        },
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 70,
+                            "max_angle": 140
+                        }
+                    ],
+                    "position_conditions": [
+                        {
+                            "point1": 0,
+                            "point2": 16,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": 0.0
+                        }
+                    ],
+                    "velocity_conditions": [
+                        {
+                            "point": 16,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.02,
+                            "required_time_span": 0.12
+                        }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "ready"
+                    ],
+                    "exit_time": 0.25,
+                    "input_actions": [
+                        "key_press:x"
+                    ],
+                    "hold_time": 0.75
+                }
+            }
+        },
+        {
+            "action_name": "high_knee_lift_left_high",
+            "description": "Left high knee (high)",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 150,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-RIGHT_HIP_24",
+                            "min_angle": 70,
+                            "max_angle": 110
+                        },
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 120,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "action_complete"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 4.5
+                },
+                "action_complete": {
+                    "state_name": "action_complete",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        {
+                            "point": 25,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": 0.25,
+                            "required_time_span": 0.15
+                        },
+                        {
+                            "point": 26,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.1,
+                            "required_time_span": 0.15
+                        }
+                    ],
+                    "time_different_condition": [
+                        {
+                            "point": 27,
+                            "axis": "y",
+                            "reference": "max",
+                            "comparison": "below_by",
+                            "threshold": 0.03,
+                            "window_seconds": 2.0
+                        }
+                    ],
+                    "next_states": [],
+                    "exit_time": 0.05,
+                    "input_actions": [
+                        "key_press:k"
+                    ],
+                    "hold_time": 0.15
+                }
+            }
+        },
+        {
+            "action_name": "high_knee_lift_right_high",
+            "description": "Right high knee (high)",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 150,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-LEFT_HIP_23",
+                            "min_angle": 70,
+                            "max_angle": 110
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 120,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "action_complete"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 4.5
+                },
+                "action_complete": {
+                    "state_name": "action_complete",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        {
+                            "point": 26,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": 0.25,
+                            "required_time_span": 0.15
+                        },
+                        {
+                            "point": 25,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.1,
+                            "required_time_span": 0.15
+                        }
+                    ],
+                    "time_different_condition": [
+                        {
+                            "point": 28,
+                            "axis": "y",
+                            "reference": "max",
+                            "comparison": "below_by",
+                            "threshold": 0.03,
+                            "window_seconds": 2.0
+                        }
+                    ],
+                    "next_states": [],
+                    "exit_time": 0.05,
+                    "input_actions": [
+                        "key_press:k"
+                    ],
+                    "hold_time": 0.15
+                }
+            }
+        },
+        {
+            "action_name": "high_knee_run",
+            "description": "High-knee run with explicit start triggers and loop fail stop",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "trigger_left",
+                        "trigger_right"
+                    ],
+                    "exit_time": 1.0,
+                    "input_actions": [],
+                    "hold_time": 3.0
+                },
+                "trigger_left": {
+                    "state_name": "trigger_left",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        {
+                            "point": 25,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": 0.4,
+                            "required_time_span": 0.15
+                        },
+                        {
+                            "point": 26,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.1,
+                            "required_time_span": 0.15
+                        }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "loop"
+                    ],
+                    "exit_time": 0.5,
+                    "input_actions": [],
+                    "hold_time": 1.5
+                },
+                "trigger_right": {
+                    "state_name": "trigger_right",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        {
+                            "point": 26,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": 0.4,
+                            "required_time_span": 0.15
+                        },
+                        {
+                            "point": 25,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.1,
+                            "required_time_span": 0.15
+                        }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "loop"
+                    ],
+                    "exit_time": 0.5,
+                    "input_actions": [],
+                    "hold_time": 1.5
+                },
+                "loop": {
+                    "state_name": "loop",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "loop": {
+                        "enabled": true,
+                        "duration_seconds": 9999.0,
+                        "allowed_gap_seconds": 1.5,
+                        "groups": [
+                            {
+                                "angle_conditions": [],
+                                "position_conditions": [],
+                                "velocity_conditions": [
+                                    {
+                                        "point": 25,
+                                        "axis": "y",
+                                        "comparison": "greater",
+                                        "threshold": 0.2,
+                                        "required_time_span": 0.15
+                                    },
+                                    {
+                                        "point": 26,
+                                        "axis": "y",
+                                        "comparison": "less",
+                                        "threshold": 0.1,
+                                        "required_time_span": 0.15
+                                    }
+                                ],
+                                "time_different_condition": [
+                                    {
+                                        "point": 27,
+                                        "axis": "y",
+                                        "reference": "max",
+                                        "comparison": "below_by",
+                                        "threshold": 0.03,
+                                        "window_seconds": 1.0
+                                    }
+                                ]
+                            },
+                            {
+                                "angle_conditions": [],
+                                "position_conditions": [],
+                                "velocity_conditions": [
+                                    {
+                                        "point": 26,
+                                        "axis": "y",
+                                        "comparison": "greater",
+                                        "threshold": 0.2,
+                                        "required_time_span": 0.15
+                                    },
+                                    {
+                                        "point": 25,
+                                        "axis": "y",
+                                        "comparison": "less",
+                                        "threshold": 0.1,
+                                        "required_time_span": 0.15
+                                    }
+                                ],
+                                "time_different_condition": [
+                                    {
+                                        "point": 28,
+                                        "axis": "y",
+                                        "reference": "max",
+                                        "comparison": "below_by",
+                                        "threshold": 0.03,
+                                        "window_seconds": 1.0
+                                    }
+                                ]
+                            }
+                        ],
+                        "fail_actions": [
+                            "switch_up:A"
+                        ]
+                    },
+                    "next_states": [],
+                    "exit_time": 4999.5,
+                    "input_actions": [],
+                    "hold_time": 14998.5
+                }
+            }
+        },
+        {
+            "action_name": "left_hook_punch",
+            "description": "左勾拳：LHS 為主分水嶺，WES 為輔助邊界，單向鏈與 exit_time 承襲成功範本。",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "description": "就緒/預備與收拳回位：軀幹旋轉小且手臂彎曲較大。",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 0,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13",
+                            "min_angle": 7,
+                            "max_angle": 35
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "extending"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 10
+                },
+                "extending": {
+                    "state_name": "extending",
+                    "description": "發力前送期：軀幹旋轉增加、手臂由彎曲過渡。",
+                    "angle_conditions": [],
+                    "position_conditions": [
+                        {
+                            "point1": 11,
+                            "point2": 13,
+                            "axis": "x",
+                            "comparison": "less",
+                            "threshold": 0.05
+                        }
+                    ],
+                    "next_states": [
+                        "peak"
+                    ],
+                    "exit_time": 0.25,
+                    "input_actions": [],
+                    "hold_time": 0.75
+                },
+                "peak": {
+                    "state_name": "peak",
+                    "description": "擊中峰值：軀幹旋轉最高、手臂彎曲角趨小（勾拳不需完全打直）。",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        {
+                            "point": 15,
+                            "axis": "x",
+                            "comparison": "less",
+                            "threshold": -1.2,
+                            "required_time_span": 0.1
+                        }
+                    ],
+                    "next_states": [],
+                    "exit_time": 0.05,
+                    "input_actions": [
+                        "key_press:p"
+                    ],
+                    "hold_time": 0.15
+                }
+            }
+        },
+        {
+            "action_name": "right_hook_punch",
+            "description": "右勾拳：RHS 為主分水嶺，WES 為輔助邊界，單向鏈與 exit_time 承襲成功範本。",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "description": "就緒/預備與收拳回位：軀幹旋轉小且手臂彎曲較大。",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 0,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14",
+                            "min_angle": 7,
+                            "max_angle": 35
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "extending"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 4.5
+                },
+                "extending": {
+                    "state_name": "extending",
+                    "description": "發力前送期：軀幹旋轉增加、手臂由彎曲過渡。",
+                    "angle_conditions": [],
+                    "position_conditions": [
+                        {
+                            "point1": 12,
+                            "point2": 14,
+                            "axis": "x",
+                            "comparison": "greater",
+                            "threshold": 0.05
+                        },
+                        {
+                            "point1": 14,
+                            "point2": 16,
+                            "axis": "x",
+                            "comparison": "greater",
+                            "threshold": 0.05
+                        }
+                    ],
+                    "next_states": [
+                        "peak"
+                    ],
+                    "exit_time": 0.25,
+                    "input_actions": [],
+                    "hold_time": 0.75
+                },
+                "peak": {
+                    "state_name": "peak",
+                    "description": "擊中峰值：軀幹旋轉最高、手臂彎曲角趨小（勾拳不需完全打直）。",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        {
+                            "point": 16,
+                            "axis": "x",
+                            "comparison": "greater",
+                            "threshold": 0.5,
+                            "required_time_span": 0.1
+                        }
+                    ],
+                    "next_states": [],
+                    "exit_time": 0.05,
+                    "input_actions": [
+                        "key_press:p"
+                    ],
+                    "hold_time": 0.15
+                }
+            }
+        },
+        {
+            "action_name": "right_high_knee_strike",
+            "description": "A right high knee strike with adjusted timing for state transitions.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 120,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 160,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "lifting"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 4.5
+                },
+                "lifting": {
+                    "state_name": "lifting",
+                    "description": "Knee is being lifted towards the chest.",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 55,
+                            "max_angle": 130
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 80,
+                            "max_angle": 170
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "peak"
+                    ],
+                    "exit_time": 3.0,
+                    "input_actions": [],
+                    "hold_time": 9.0
+                },
+                "peak": {
+                    "state_name": "peak",
+                    "description": "Knee reaches the highest point of the strike.",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28",
+                            "min_angle": 45,
+                            "max_angle": 55
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-LEFT_HIP_23",
+                            "min_angle": 50,
+                            "max_angle": 60
+                        },
+                        {
+                            "angle_name": "RIGHT_KNEE_26-RIGHT_HIP_24-RIGHT_SHOULDER_12",
+                            "min_angle": 50,
+                            "max_angle": 80
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [],
+                    "exit_time": 2.5,
+                    "input_actions": [
+                        "key_press:k"
+                    ],
+                    "hold_time": 7.5
+                }
+            }
+        },
+        {
+            "action_name": "left_high_knee_strike",
+            "description": "A left high knee strike with adjusted timing for state transitions.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 100,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 120,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "lifting"
+                    ],
+                    "exit_time": 1.5,
+                    "input_actions": [],
+                    "hold_time": 4.5
+                },
+                "lifting": {
+                    "state_name": "lifting",
+                    "description": "Knee is being lifted towards the chest.",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27",
+                            "min_angle": 40,
+                            "max_angle": 120
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 55,
+                            "max_angle": 130
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "peak"
+                    ],
+                    "exit_time": 3.0,
+                    "input_actions": [],
+                    "hold_time": 9.0
+                },
+                "peak": {
+                    "state_name": "peak",
+                    "description": "Knee reaches the highest point of the strike.",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-RIGHT_HIP_24",
+                            "min_angle": 145,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "LEFT_KNEE_25-LEFT_HIP_23-LEFT_SHOULDER_11",
+                            "min_angle": 40,
+                            "max_angle": 60
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [],
+                    "exit_time": 2.5,
+                    "input_actions": [
+                        "key_press:k"
+                    ],
+                    "hold_time": 7.5
+                }
+            }
+        },
+        {
+            "action_name": "both_arms_side_T",
+            "description": "Arms extended sideways (T-pose-ish). Only arms are checked, relaxed.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "next_states": [
+                        "detected"
+                    ],
+                    "exit_time": 5.0,
+                    "input_actions": []
+                },
+                "detected": {
+                    "state_name": "detected",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 150,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 130,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13",
+                            "min_angle": 70,
+                            "max_angle": 130
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14",
+                            "min_angle": 70,
+                            "max_angle": 130
+                        }
+                    ],
+                    "position_conditions": [
+                        { "point1": 15, "point2": 11, "axis": "x", "comparison": "greater", "threshold": 0.0 },
+                        { "point1": 16, "point2": 12, "axis": "x", "comparison": "less", "threshold": 0.0 }
+                    ],
+                    "next_states": [],
+                    "exit_time": 0.3,
+                    "input_actions": [
+                        "key_press:t"
+                    ]
+                }
+            }
+        },
+        {
+            "action_name": "left_arm_side",
+            "description": "Left arm extended sideways. Only left arm checked, relaxed.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "next_states": [
+                        "detected"
+                    ],
+                    "exit_time": 5.0,
+                    "input_actions": []
+                },
+                "detected": {
+                    "state_name": "detected",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 150,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "LEFT_HIP_23-LEFT_SHOULDER_11-LEFT_ELBOW_13",
+                            "min_angle": 70,
+                            "max_angle": 130
+                        }
+                    ],
+                    "position_conditions": [
+                        { "point1": 15, "point2": 11, "axis": "x", "comparison": "greater", "threshold": 0.0 }
+                    ],
+                    "next_states": [],
+                    "exit_time": 0.3,
+                    "input_actions": [
+                        "key_press:j"
+                    ]
+                }
+            }
+        },
+        {
+            "action_name": "right_arm_side",
+            "description": "Right arm extended sideways. Only right arm checked, relaxed.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "next_states": [
+                        "detected"
+                    ],
+                    "exit_time": 5.0,
+                    "input_actions": []
+                },
+                "detected": {
+                    "state_name": "detected",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 130,
+                            "max_angle": 180
+                        },
+                        {
+                            "angle_name": "RIGHT_HIP_24-RIGHT_SHOULDER_12-RIGHT_ELBOW_14",
+                            "min_angle": 70,
+                            "max_angle": 130
+                        }
+                    ],
+                    "position_conditions": [
+                        { "point1": 16, "point2": 12, "axis": "x", "comparison": "less", "threshold": 0.0 }
+                    ],
+                    "next_states": [],
+                    "exit_time": 0.3,
+                    "input_actions": [
+                        "key_press:l"
+                    ]
+                }
+            }
+        },
+        {
+            "action_name": "right_overhand_throw",
+            "description": "Right-hand overhand throw (relaxed): hand above shoulder and arm extends.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 60,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "throw_peak"
+                    ],
+                    "exit_time": 5.0,
+                    "input_actions": []
+                },
+                "throw_peak": {
+                    "state_name": "throw_peak",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "RIGHT_WRIST_16-RIGHT_ELBOW_14-RIGHT_SHOULDER_12",
+                            "min_angle": 110,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [
+                        {
+                            "point1": 16,
+                            "point2": 0,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.0
+                        }
+                    ],
+                    "velocity_conditions": [
+                        {
+                            "point": 16,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": 0.04,
+                            "required_time_span": 0.12
+                        }
+                    ],
+                    "next_states": [],
+                    "exit_time": 0.2,
+                    "input_actions": [
+                        "key_press:g"
+                    ]
+                }
+            }
+        },
+        {
+            "action_name": "left_overhand_throw",
+            "description": "Left-hand overhand throw (relaxed): hand above shoulder and arm extends.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 60,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [],
+                    "next_states": [
+                        "throw_peak"
+                    ],
+                    "exit_time": 5.0,
+                    "input_actions": []
+                },
+                "throw_peak": {
+                    "state_name": "throw_peak",
+                    "angle_conditions": [
+                        {
+                            "angle_name": "LEFT_WRIST_15-LEFT_ELBOW_13-LEFT_SHOULDER_11",
+                            "min_angle": 110,
+                            "max_angle": 180
+                        }
+                    ],
+                    "position_conditions": [
+                        {
+                            "point1": 15,
+                            "point2": 0,
+                            "axis": "y",
+                            "comparison": "less",
+                            "threshold": 0.0
+                        }
+                    ],
+                    "velocity_conditions": [
+                        {
+                            "point": 15,
+                            "axis": "y",
+                            "comparison": "greater",
+                            "threshold": 0.04,
+                            "required_time_span": 0.12
+                        }
+                    ],
+                    "next_states": [],
+                    "exit_time": 0.2,
+                    "input_actions": [
+                        "key_press:f"
+                    ]
+                }
+            }
+        },
+        {
+            "action_name": "low_knee_alternating_loop",
+            "description": "Alternating low knee lifts (relaxed): either knee lifts modestly; loop-friendly.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "trigger_left",
+                        "trigger_right"
+                    ],
+                    "exit_time": 1.0,
+                    "input_actions": [],
+                    "hold_time": 3.0
+                },
+                "trigger_left": {
+                    "state_name": "trigger_left",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        { "point": 25, "axis": "y", "comparison": "greater", "threshold": 0.10, "required_time_span": 0.18 },
+                        { "point": 26, "axis": "y", "comparison": "less",    "threshold": 0.05, "required_time_span": 0.18 }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": ["loop"],
+                    "exit_time": 0.6,
+                    "input_actions": [],
+                    "hold_time": 2.0
+                },
+                "trigger_right": {
+                    "state_name": "trigger_right",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        { "point": 26, "axis": "y", "comparison": "greater", "threshold": 0.10, "required_time_span": 0.18 },
+                        { "point": 25, "axis": "y", "comparison": "less",    "threshold": 0.05, "required_time_span": 0.18 }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": ["loop"],
+                    "exit_time": 0.6,
+                    "input_actions": [],
+                    "hold_time": 2.0
+                },
+                "loop": {
+                    "state_name": "loop",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "loop": {
+                        "enabled": true,
+                        "duration_seconds": 9999.0,
+                        "allowed_gap_seconds": 0.8,
+                        "groups": [
+                            {
+                                "angle_conditions": [
+                                    {
+                                        "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27", "min_angle": 50, "max_angle": 160
+                                    }
+                                ],
+                                "position_conditions": [
+                                    {
+                                        "point1": 25, "point2": 23, "axis": "y", "comparison": "less", "threshold": -0.035
+                                    }
+                                ],
+                                "velocity_conditions": [
+                                    { "point": 26, "axis": "y", "comparison": "greater", "threshold": 0.10, "required_time_span": 0.18 },
+                                    { "point": 25, "axis": "y", "comparison": "less",    "threshold": 0.05, "required_time_span": 0.18 }
+                                ],
+                                "time_different_condition": [],
+                                "input_actions": [
+                                    "key_press:space"
+                                ],
+                                "cooldown_ms": 300
+                            },
+                            {
+                                "angle_conditions": [
+                                    {
+                                        "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28", "min_angle": 50, "max_angle": 160
+                                    }
+                                ],
+                                "position_conditions": [
+                                    {
+                                        "point1": 26, "point2": 24, "axis": "y", "comparison": "less", "threshold": -0.035
+                                    }
+                                ],
+                                "velocity_conditions": [
+                                    { "point": 25, "axis": "y", "comparison": "greater", "threshold": 0.13, "required_time_span": 0.16 },
+                                    { "point": 26, "axis": "y", "comparison": "less",    "threshold": 0.06, "required_time_span": 0.16 }
+                                ],
+                                "time_different_condition": [],
+                                "input_actions": [
+                                    "key_press:space"
+                                ],
+                                "cooldown_ms": 300
+                            }
+                        ],
+                        "fail_actions": []
+                    },
+                    "next_states": [],
+                    "exit_time": 5000,
+                    "input_actions": [],
+                    "hold_time": 15000
+                }
+            }
+        },
+        {
+            "action_name": "low_knee_run_loop",
+            "description": "Low high-knee running (relaxed): rapid alternating modest knee lifts.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "trigger_left",
+                        "trigger_right"
+                    ],
+                    "exit_time": 1.0,
+                    "input_actions": [],
+                    "hold_time": 50.0
+                },
+                "trigger_left": {
+                    "state_name": "trigger_left",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        { "point": 25, "axis": "y", "comparison": "greater", "threshold": 0.13, "required_time_span": 0.16 },
+                        { "point": 26, "axis": "y", "comparison": "less",    "threshold": 0.06, "required_time_span": 0.16 }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": ["loop"],
+                    "exit_time": 0.5,
+                    "input_actions": [],
+                    "hold_time": 1.5
+                },
+                "trigger_right": {
+                    "state_name": "trigger_right",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        { "point": 26, "axis": "y", "comparison": "greater", "threshold": 0.13, "required_time_span": 0.16 },
+                        { "point": 25, "axis": "y", "comparison": "less",    "threshold": 0.06, "required_time_span": 0.16 }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": ["loop"],
+                    "exit_time": 0.5,
+                    "input_actions": [],
+                    "hold_time": 1.5
+                },
+                "loop": {
+                    "state_name": "loop",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "loop": {
+                        "enabled": true,
+                        "duration_seconds": 9999.0,
+                        "allowed_gap_seconds": 1.5,
+                        "groups": [
+                            {
+                                "angle_conditions": [
+                                    {
+                                        "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27", "min_angle": 55, "max_angle": 155
+                                    }
+                                ],
+                                "position_conditions": [
+                                    {
+                                        "point1": 25, "point2": 23, "axis": "y", "comparison": "less", "threshold": -0.03
+                                    }
+                                ],
+                                "velocity_conditions": [
+                                    { "point": 26, "axis": "y", "comparison": "greater", "threshold": 0.13, "required_time_span": 0.16 },
+                                    { "point": 25, "axis": "y", "comparison": "less",    "threshold": 0.06, "required_time_span": 0.16 }
+                                ],
+                                "time_different_condition": [],
+                                "input_actions": [
+                                    "key_press:up"
+                                ]
+                            },
+                            {
+                                "angle_conditions": [
+                                    {
+                                        "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28", "min_angle": 55, "max_angle": 155
+                                    }
+                                ],
+                                "position_conditions": [
+                                    {
+                                        "point1": 26, "point2": 24, "axis": "y", "comparison": "less", "threshold": -0.03
+                                    }
+                                ],
+                                "velocity_conditions": [],
+                                "time_different_condition": [],
+                                "input_actions": [
+                                    "key_press:up"
+                                ]
+                                
+                            }
+                        ],
+                        "fail_actions": []
+                    },
+                    "next_states": [],
+                    "exit_time": 5000,
+                    "input_actions": [],
+                    "hold_time": 15000
+                }
+            }
+        },
+        {
+            "action_name": "low_knee_run_loop_fast",
+            "description": "Low high-knee running (relaxed): rapid alternating modest knee lifts.",
+            "initial_state": "ready",
+            "states": {
+                "ready": {
+                    "state_name": "ready",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "next_states": [
+                        "trigger_left",
+                        "trigger_right"
+                    ],
+                    "exit_time": 1.0,
+                    "input_actions": [],
+                    "hold_time": 3.0
+                },
+                "trigger_left": {
+                    "state_name": "trigger_left",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        { "point": 25, "axis": "y", "comparison": "greater", "threshold": 0.13, "required_time_span": 0.16 },
+                        { "point": 26, "axis": "y", "comparison": "less",    "threshold": 0.06, "required_time_span": 0.16 }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": ["loop"],
+                    "exit_time": 0.5,
+                    "input_actions": [],
+                    "hold_time": 1.5
+                },
+                "trigger_right": {
+                    "state_name": "trigger_right",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [
+                        { "point": 26, "axis": "y", "comparison": "greater", "threshold": 0.13, "required_time_span": 0.16 },
+                        { "point": 25, "axis": "y", "comparison": "less",    "threshold": 0.06, "required_time_span": 0.16 }
+                    ],
+                    "time_different_condition": [],
+                    "next_states": ["loop"],
+                    "exit_time": 0.5,
+                    "input_actions": [],
+                    "hold_time": 1.5
+                },
+                "loop": {
+                    "state_name": "loop",
+                    "angle_conditions": [],
+                    "position_conditions": [],
+                    "velocity_conditions": [],
+                    "time_different_condition": [],
+                    "loop": {
+                        "enabled": true,
+                        "duration_seconds": 9999.0,
+                        "allowed_gap_seconds": 1.0,
+                        "groups": [
+                            {
+                                "angle_conditions": [
+                                    {
+                                        "angle_name": "LEFT_HIP_23-LEFT_KNEE_25-LEFT_ANKLE_27", "min_angle": 55, "max_angle": 155
+                                    }
+                                ],
+                                "position_conditions": [
+                                    {
+                                        "point1": 25, "point2": 23, "axis": "y", "comparison": "less", "threshold": -0.03
+                                    }
+                                ],
+                                "velocity_conditions": [
+                                    { "point": 26, "axis": "y", "comparison": "greater", "threshold": 0.13, "required_time_span": 0.16 },
+                                    { "point": 25, "axis": "y", "comparison": "less",    "threshold": 0.06, "required_time_span": 0.16 }
+                                ],
+                                "time_different_condition": [],
+                                "input_actions": [
+                                    "key_press:up"
+                                ],
+                                "cooldown_ms": 200
+                            },
+                            {
+                                "angle_conditions": [
+                                    {
+                                        "angle_name": "RIGHT_HIP_24-RIGHT_KNEE_26-RIGHT_ANKLE_28", "min_angle": 55, "max_angle": 155
+                                    }
+                                ],
+                                "position_conditions": [
+                                    {
+                                        "point1": 26, "point2": 24, "axis": "y", "comparison": "less", "threshold": -0.03
+                                    }
+                                ],
+                                "velocity_conditions": [],
+                                "time_different_condition": [],
+                                "input_actions": [
+                                    "key_press:up"
+                                ],
+                                "cooldown_ms": 200
+                            }
+                        ],
+                        "fail_actions": []
+                    },
+                    "next_states": [],
+                    "exit_time": 5000,
+                    "input_actions": [],
+                    "hold_time": 15000
+                }
+            }
+        }
+    ]
+}

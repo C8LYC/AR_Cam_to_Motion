@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac62d8a931fdad4eb065f88553730a2, type: 3}
+  m_Name: right_front_kick
+  m_EditorClassIdentifier: 
+  actionName: right_front_kick
+  IsActive: 1
+  motionStates:
+  - {fileID: 11400000, guid: f6b7be6b20b232a4db1ede9fdd371ea9, type: 2}
+  - {fileID: 11400000, guid: a60d23bc283ea6f4787c824a3cebd15c, type: 2}
+  - {fileID: 11400000, guid: 339d0dc34ebc4fa4cb6bd35d7e230717, type: 2}

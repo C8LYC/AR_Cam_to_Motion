@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac62d8a931fdad4eb065f88553730a2, type: 3}
+  m_Name: low_knee_run_loop_fast
+  m_EditorClassIdentifier: 
+  actionName: low_knee_run_loop_fast
+  IsActive: 1
+  motionStates:
+  - {fileID: 11400000, guid: 9767518c507f9ad458509621ec8e892f, type: 2}
+  - {fileID: 11400000, guid: 037e6e123cd309c438fdaea0cff8f5fb, type: 2}
+  - {fileID: 11400000, guid: fbdc3b58f9219ae4b833215b74f83c02, type: 2}
+  - {fileID: 11400000, guid: 4f2ea0ba35fce664d922a0771a988247, type: 2}

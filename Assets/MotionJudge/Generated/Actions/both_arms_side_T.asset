@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac62d8a931fdad4eb065f88553730a2, type: 3}
+  m_Name: both_arms_side_T
+  m_EditorClassIdentifier: 
+  actionName: both_arms_side_T
+  IsActive: 1
+  motionStates:
+  - {fileID: 11400000, guid: 2b7eceb0e7f28fa45912a3c0327b3509, type: 2}
+  - {fileID: 11400000, guid: 4d5e38de967cd464ead06233e6ef0262, type: 2}

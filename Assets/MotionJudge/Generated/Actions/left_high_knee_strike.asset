@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac62d8a931fdad4eb065f88553730a2, type: 3}
+  m_Name: left_high_knee_strike
+  m_EditorClassIdentifier: 
+  actionName: left_high_knee_strike
+  IsActive: 1
+  motionStates:
+  - {fileID: 11400000, guid: 3a0147fb67b3f2a4ca367c9b998d04c2, type: 2}
+  - {fileID: 11400000, guid: 3e6f5dc437366cc44852600219612b92, type: 2}
+  - {fileID: 11400000, guid: e37cf6184e3f5b648a7bd6eb52244eb9, type: 2}

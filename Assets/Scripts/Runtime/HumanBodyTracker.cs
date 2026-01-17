@@ -64,6 +64,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
                 boneController.InitializeSkeletonJoints();
                 boneController.ApplyBodyPose(humanBody);
+                SkeletonRootProvider.SetCurrentRoot(boneController.skeletonRoot);
             }
 
             foreach (var humanBody in eventArgs.updated)
@@ -71,6 +72,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 if (m_SkeletonTracker.TryGetValue(humanBody.trackableId, out boneController))
                 {
                     boneController.ApplyBodyPose(humanBody);
+                    SkeletonRootProvider.SetCurrentRoot(boneController.skeletonRoot);
                 }
             }
 
@@ -79,6 +81,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 Debug.Log($"Removing a skeleton [{trackableId}].");
                 if (m_SkeletonTracker.TryGetValue(trackableId, out boneController))
                 {
+                    SkeletonRootProvider.ClearIfMatches(boneController.skeletonRoot);
                     Destroy(boneController.gameObject);
                     m_SkeletonTracker.Remove(trackableId);
                 }

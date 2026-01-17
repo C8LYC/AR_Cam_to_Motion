@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac62d8a931fdad4eb065f88553730a2, type: 3}
+  m_Name: high_knee_run
+  m_EditorClassIdentifier: 
+  actionName: high_knee_run
+  IsActive: 1
+  motionStates:
+  - {fileID: 11400000, guid: 8bd78575c39643542a5a94986f414136, type: 2}
+  - {fileID: 11400000, guid: d7e4044c3c6968642a672ec75be0f0e5, type: 2}
+  - {fileID: 11400000, guid: 764d15c4be51e3e46a20b0bc5a0c89ae, type: 2}
+  - {fileID: 11400000, guid: f78a281f1345ff64cbed3beafb0d4ec6, type: 2}

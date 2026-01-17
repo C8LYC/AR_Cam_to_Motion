@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd80734d73c5b8f4a91b8b928f6fa30c, type: 3}
+  m_Name: peak
+  m_EditorClassIdentifier: 
+  stateName: peak
+  conditions:
+  - rid: 4767182644116979805
+  - rid: 4767182644116979806
+  exit_time: 0.05
+  hold_time: 0.15
+  nextStateIndexs: 
+  references:
+    version: 2
+    RefIds:
+    - rid: 4767182644116979805
+      type: {class: AngleCondition, ns: , asm: Assembly-CSharp}
+      data:
+        skeletonRoot: {fileID: 0}
+        startJoint: 22
+        middleJoint: 21
+        endJoint: 19
+        minAngle: 90
+        maxAngle: 180
+    - rid: 4767182644116979806
+      type: {class: AngleCondition, ns: , asm: Assembly-CSharp}
+      data:
+        skeletonRoot: {fileID: 0}
+        startJoint: 2
+        middleJoint: 19
+        endJoint: 21
+        minAngle: 70
+        maxAngle: 125

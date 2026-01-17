@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac62d8a931fdad4eb065f88553730a2, type: 3}
+  m_Name: in_place_jump
+  m_EditorClassIdentifier: 
+  actionName: in_place_jump
+  IsActive: 1
+  motionStates:
+  - {fileID: 11400000, guid: 46a89c207ecb0804f830589c066158f1, type: 2}
+  - {fileID: 11400000, guid: a136904ffa56a7847a5c5bf905901426, type: 2}

@@ -3726,6 +3726,7 @@ GameObject:
   - component: {fileID: 1484671604}
   - component: {fileID: 1484671603}
   - component: {fileID: 1484671602}
+  - component: {fileID: 1484671607}
   m_Layer: 0
   m_Name: Human Body Tracking (1)
   m_TagString: Untagged
@@ -3808,6 +3809,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1484671607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484671601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a29749932933238419228f93d962dcf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 136e3aae7a7ed174fae75e0445f10629, type: 2}
+  - {fileID: 11400000, guid: ca1b90375390a254db446ae92c737e54, type: 2}
 --- !u!1 &1544727189
 GameObject:
   m_ObjectHideFlags: 0

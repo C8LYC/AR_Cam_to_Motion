@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd80734d73c5b8f4a91b8b928f6fa30c, type: 3}
+  m_Name: completed
+  m_EditorClassIdentifier: 
+  stateName: completed
+  conditions:
+  - rid: 4767182644116979795
+  - rid: 4767182644116979796
+  - rid: 4767182644116979797
+  - rid: 4767182644116979798
+  exit_time: 0.25
+  hold_time: 0.75
+  nextStateIndexs: 00000000
+  references:
+    version: 2
+    RefIds:
+    - rid: 4767182644116979795
+      type: {class: AngleCondition, ns: , asm: Assembly-CSharp}
+      data:
+        skeletonRoot: {fileID: 0}
+        startJoint: 65
+        middleJoint: 63
+        endJoint: 7
+        minAngle: 100
+        maxAngle: 160
+    - rid: 4767182644116979796
+      type: {class: AngleCondition, ns: , asm: Assembly-CSharp}
+      data:
+        skeletonRoot: {fileID: 0}
+        startJoint: 66
+        middleJoint: 65
+        endJoint: 63
+        minAngle: 70
+        maxAngle: 140
+    - rid: 4767182644116979797
+      type: {class: PositionAxisCondition, ns: , asm: Assembly-CSharp}
+      data:
+        skeletonRoot: {fileID: 0}
+        point1: 58
+        point2: 66
+        axis: 1
+        comparison: 1
+        threshold: 0
+    - rid: 4767182644116979798
+      type: {class: VelocityAxisCondition, ns: , asm: Assembly-CSharp}
+      data:
+        skeletonRoot: {fileID: 0}
+        point: 66
+        axis: 1
+        comparison: 0
+        threshold: 0.02
+        requiredTimeSeconds: 0.12
