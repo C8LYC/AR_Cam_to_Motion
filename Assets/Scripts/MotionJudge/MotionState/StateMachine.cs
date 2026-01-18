@@ -12,8 +12,11 @@ public class StateMachine : MonoBehaviour
 
     public GameObject MotionLookupUI;
 
-    public Color activeStateColor = new Color(0.2f, 0.9f, 0.2f, 1f);
-    public Color inactiveStateColor = new Color(0.8f, 0.8f, 0.8f, 1f);
+    public GameObject ActionTitlePrefab;
+    public GameObject ActionStateGroupPrefab;
+
+    public Color activeStateColor = new Color(0.2f, 0.9f, 0.2f, 0.3f);
+    public Color inactiveStateColor = new Color(0.8f, 0.8f, 0.8f, 0.3f);
 
     class ActionRuntime
     {
@@ -138,6 +141,16 @@ public class StateMachine : MonoBehaviour
             if (action == null || action.motionStates == null)
                 continue;
 
+            if (ActionTitlePrefab != null)
+                InstantiateActionTitle(parent, action.actionName);
+
+            Transform rowParent = parent;
+            if (ActionStateGroupPrefab != null)
+            {
+                GameObject rowInstance = Instantiate(ActionStateGroupPrefab, parent, false);
+                rowParent = rowInstance.transform;
+            }
+
             List<StateDisplayEntry> entries = new List<StateDisplayEntry>();
             for (int j = 0; j < action.motionStates.Count; j++)
             {
@@ -145,7 +158,7 @@ public class StateMachine : MonoBehaviour
                 if (state == null)
                     continue;
 
-                GameObject instance = Instantiate(MotionStateDisplayPrefab, parent, false);
+                GameObject instance = Instantiate(MotionStateDisplayPrefab, rowParent, false);
                 Image image = instance.GetComponent<Image>();
                 if (image == null)
                     image = instance.GetComponentInChildren<Image>(true);
@@ -163,6 +176,7 @@ public class StateMachine : MonoBehaviour
                     image = image,
                     label = label
                 });
+
             }
 
             if (entries.Count > 0)
@@ -192,5 +206,13 @@ public class StateMachine : MonoBehaviour
 
             entry.image.color = entry.state == activeState ? activeStateColor : inactiveStateColor;
         }
+    }
+
+    void InstantiateActionTitle(Transform parent, string actionName)
+    {
+        GameObject instance = Instantiate(ActionTitlePrefab, parent, false);
+        TMP_Text label = instance.GetComponentInChildren<TMP_Text>(true);
+        if (label != null)
+            label.text = actionName;
     }
 }
