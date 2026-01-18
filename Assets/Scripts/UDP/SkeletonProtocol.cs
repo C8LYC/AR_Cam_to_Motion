@@ -29,7 +29,7 @@ public class SkeletonProtocol
     #region 關鍵點模式 (Reduced 14 點)
     public static byte[] PackReduced(ARHumanBody body)
     {
-        var joints = body.joints;
+		var joints = body.joints;
         JointData[] reducedData = new JointData[ReducedJointCount];
         
         for (int i = 0; i < ReducedJointCount; i++)
@@ -64,7 +64,13 @@ public class SkeletonProtocol
 
     private static byte[] Serialize(JointData[] joints, int count)
     {
-        int packetSize = 4 + (count * BytesPerJoint);
+        byte[] data = new byte[12];
+		Buffer.BlockCopy(BitConverter.GetBytes(1f), 0, data, 0, 4);
+		Buffer.BlockCopy(BitConverter.GetBytes(2f), 0, data, 4, 4);
+		Buffer.BlockCopy(BitConverter.GetBytes(3f), 0, data, 8, 4);
+		return data;
+
+		int packetSize = 4 + (count * BytesPerJoint);
         byte[] packet = new byte[packetSize];
         Buffer.BlockCopy(BitConverter.GetBytes(count), 0, packet, 0, 4);
 
