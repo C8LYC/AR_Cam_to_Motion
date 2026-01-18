@@ -4,6 +4,8 @@ using UnityEngine.XR.ARSubsystems;
 using System.Net;
 using System.Net.Sockets;
 using System;
+using TMPro;
+using System.Text;
 
 public class ARSkeletonSender : MonoBehaviour
 {
@@ -19,10 +21,13 @@ public class ARSkeletonSender : MonoBehaviour
     public ARHumanBodyManager humanBodyManager;
 
     private UdpClient udpClient;
-    private IPEndPoint remoteEndPoint; 
+    private IPEndPoint remoteEndPoint;
+	public TMP_Text infoText;
 
-    public int TotalPacketsSent { get; private set; } = 0;
+	public int TotalPacketsSent { get; private set; } = 0;
     public bool isSending { get; private set; } = true;
+
+    public bool isStart = true;
 
     void Start()
     {
@@ -103,7 +108,24 @@ public class ARSkeletonSender : MonoBehaviour
         {
             // 使用您指定的 14 個關鍵點進行辨識 (含 Position 與 Rotation)
             packet = SkeletonProtocol.PackReduced(body);
-        }
+			StringBuilder sb = new StringBuilder();
+
+			if (isStart)
+            {
+				var joints = body.joints;
+				for (int i = 0; i < SkeletonProtocol.ReducedJointCount; i++)
+				{
+					int unityIndex = SkeletonProtocol.ReducedIndices[i];
+					if (unityIndex < joints.Length)
+					{
+						sb.AppendLine("Joint : " + unityIndex + " : " + joints[unityIndex].anchorPose.position);
+					}
+				}
+				isStart = false;
+				infoText.text = sb.ToString();
+			}
+			
+		}
         else
         {
             // 使用完整的 91 個關節進行骨架同步
