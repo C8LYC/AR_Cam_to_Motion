@@ -64,12 +64,6 @@ public class SkeletonProtocol
 
     private static byte[] Serialize(JointData[] joints, int count)
     {
-        byte[] data = new byte[12];
-		Buffer.BlockCopy(BitConverter.GetBytes(1f), 0, data, 0, 4);
-		Buffer.BlockCopy(BitConverter.GetBytes(2f), 0, data, 4, 4);
-		Buffer.BlockCopy(BitConverter.GetBytes(3f), 0, data, 8, 4);
-		return data;
-
 		int packetSize = 4 + (count * BytesPerJoint);
         byte[] packet = new byte[packetSize];
         Buffer.BlockCopy(BitConverter.GetBytes(count), 0, packet, 0, 4);
