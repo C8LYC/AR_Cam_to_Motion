@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "ARBodyTracking.slnx"
+    "dotnet.defaultSolution": "AR_Cam_to_Motion.slnx"
 }

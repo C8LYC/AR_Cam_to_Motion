@@ -37,8 +37,8 @@ public class SkeletonProtocol
             int unityIndex = ReducedIndices[i];
             if (unityIndex < joints.Length)
             {
-                reducedData[i].position = joints[unityIndex].anchorPose.position;
-                reducedData[i].rotation = joints[unityIndex].anchorPose.rotation;
+                reducedData[i].position = joints[unityIndex].localPose.position;
+                reducedData[i].rotation = joints[unityIndex].localPose.rotation;
             }
         }
         return Serialize(reducedData, ReducedJointCount);
@@ -54,8 +54,8 @@ public class SkeletonProtocol
         {
             if (i < joints.Length)
             {
-                fullData[i].position = joints[i].anchorPose.position;
-                fullData[i].rotation = joints[i].anchorPose.rotation;
+                fullData[i].position = joints[i].localPose.position;
+                fullData[i].rotation = joints[i].localPose.rotation;
             }
         }
         return Serialize(fullData, JointCount);
