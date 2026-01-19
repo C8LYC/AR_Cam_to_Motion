@@ -149,6 +149,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public void ApplyBodyPose(ARHumanBody body)
         {
+            if (!this.enabled)
+                return;
+                
             var joints = body.joints;
             if (!joints.IsCreated)
                 return;

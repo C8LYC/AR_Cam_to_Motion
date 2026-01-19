@@ -130,6 +130,23 @@ public class ARSkeletonSender : MonoBehaviour
         {
             // 使用完整的 91 個關節進行骨架同步
             packet = SkeletonProtocol.PackFull(body);
+
+            StringBuilder sb = new StringBuilder();
+
+			if (isStart)
+            {
+				var joints = body.joints;
+				for (int i = 0; i < SkeletonProtocol.JointCount; i++)
+				{
+					
+					if (i < joints.Length)
+					{
+						sb.AppendLine("Joint : " + i + " : " + joints[i].anchorPose.position);
+					}
+				}
+				isStart = false;
+				infoText.text = sb.ToString();
+			}
         }
 
         if (packet == null || packet.Length == 0) return;
