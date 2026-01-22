@@ -126,7 +126,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        Transform[] m_BoneMapping = new Transform[k_NumSkeletonJoints];
+        public Transform[] m_BoneMapping = new Transform[k_NumSkeletonJoints];
 
         public void InitializeSkeletonJoints()
         {
@@ -160,7 +160,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 XRHumanBodyJoint joint = joints[i];
                 var bone = m_BoneMapping[i];
-                if (bone != null)
+                if (bone != null && joint.tracked)
                 {
                     bone.transform.localPosition = joint.localPose.position;
                     //bone.transform.localRotation = m_InitialRotations[i] * joint.localPose.rotation;
@@ -169,7 +169,29 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        void ProcessJoint(Transform joint)
+		public void ApplyBodyPose(ARHumanBody body, bool isFirst)
+		{
+			if (!this.enabled)
+				return;
+
+			var joints = body.joints;
+			if (!joints.IsCreated)
+				return;
+
+			for (int i = 0; i < k_NumSkeletonJoints; ++i)
+			{
+				XRHumanBodyJoint joint = joints[i];
+				var bone = m_BoneMapping[i];
+				if (bone != null && joint.tracked)
+				{
+					bone.transform.localPosition = joint.localPose.position;
+					//bone.transform.localRotation = m_InitialRotations[i] * joint.localPose.rotation;
+					bone.transform.localRotation = joint.localPose.rotation;
+				}
+			}
+		}
+
+		void ProcessJoint(Transform joint)
         {
             int index = GetJointIndex(joint.name);
             if (index >= 0 && index < k_NumSkeletonJoints)

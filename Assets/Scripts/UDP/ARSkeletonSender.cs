@@ -9,6 +9,21 @@ using System.Text;
 
 public class ARSkeletonSender : MonoBehaviour
 {
+    public static ARSkeletonSender Instance { get; private set; }
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     [Header("Network Settings")]
     public string pcIpAddress = "192.168.1.100";
     public int pcPort = 8080;
@@ -60,7 +75,7 @@ public class ARSkeletonSender : MonoBehaviour
     {
         isSending = state;
     }
-
+    /*
     void OnEnable()
     {
         if (humanBodyManager != null)
@@ -72,6 +87,8 @@ public class ARSkeletonSender : MonoBehaviour
         if (humanBodyManager != null)
             humanBodyManager.humanBodiesChanged -= OnHumanBodiesChanged;
     }
+
+    */
 
     void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs eventArgs)
     {
@@ -164,6 +181,77 @@ public class ARSkeletonSender : MonoBehaviour
                 Debug.LogWarning($"[ARSkeletonSender] UDP 發送失敗: {e.Message}");
         }
     }
+
+    public void SendBodyData(ARHumanBody body, Transform[] boneTransforms)
+    {
+        if (!body.joints.IsCreated) return;
+
+        byte[] packet;
+
+        // 根據設定選擇打包模式
+        if (useReducedMode)
+        {
+            // 使用您指定的 14 個關鍵點進行辨識 (含 Position 與 Rotation)
+            packet = SkeletonProtocol.PackReduced(body, boneTransforms);
+			StringBuilder sb = new StringBuilder();
+
+            // Debug
+			if (isStart)
+            {
+				var joints = body.joints;
+				for (int i = 0; i < SkeletonProtocol.ReducedJointCount; i++)
+				{
+					int unityIndex = SkeletonProtocol.ReducedIndices[i];
+					if (unityIndex < joints.Length)
+					{
+						sb.AppendLine("Joint : " + unityIndex + " : " + joints[unityIndex].anchorPose.position);
+					}
+				}
+				isStart = false;
+				infoText.text = sb.ToString();
+			}
+			
+		}
+        else
+        {
+            // 使用完整的 91 個關節進行骨架同步
+            packet = SkeletonProtocol.PackFull(body, boneTransforms);
+
+            StringBuilder sb = new StringBuilder();
+
+            // Debug
+			if (isStart)
+            {
+				var joints = body.joints;
+				for (int i = 0; i < SkeletonProtocol.JointCount; i++)
+				{
+					
+					if (i < joints.Length)
+					{
+						sb.AppendLine("Joint : " + i + " : " + joints[i].anchorPose.position);
+					}
+				}
+				isStart = false;
+				infoText.text = sb.ToString();
+			}
+        }
+
+        if (packet == null || packet.Length == 0) return;
+
+        try
+        {
+            // 使用非同步發送，確保不影響 AR 渲染效能 (避免掉幀)
+            udpClient.BeginSend(packet, packet.Length, remoteEndPoint, null, null);
+            TotalPacketsSent++;
+        }
+        catch (Exception e)
+        {
+            // 減少 Log 頻率，避免卡頓
+            if (TotalPacketsSent % 100 == 0)
+                Debug.LogWarning($"[ARSkeletonSender] UDP 發送失敗: {e.Message}");
+        }
+    }
+
 
     public void OpenReducedPackMode()
     {

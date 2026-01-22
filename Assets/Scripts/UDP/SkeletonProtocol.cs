@@ -43,6 +43,33 @@ public class SkeletonProtocol
         }
         return Serialize(reducedData, ReducedJointCount);
     }
+
+    public static byte[] PackReduced(ARHumanBody body, Transform[] boneTransforms)
+    {
+		var joints = body.joints;
+        JointData[] reducedData = new JointData[ReducedJointCount];
+        
+        for (int i = 0; i < ReducedJointCount; i++)
+        {
+            int unityIndex = ReducedIndices[i];
+            if (unityIndex < joints.Length)
+            {
+                if(joints[unityIndex].tracked)
+                {
+					reducedData[i].position = joints[unityIndex].localPose.position;
+					reducedData[i].rotation = joints[unityIndex].localPose.rotation;
+				}
+				else
+				{
+					// 使用骨架預設位置與旋轉
+					reducedData[i].position = boneTransforms[unityIndex].localPosition;
+					reducedData[i].rotation = boneTransforms[unityIndex].localRotation;
+				}
+			}
+            
+        }
+        return Serialize(reducedData, ReducedJointCount);
+    }
     #endregion
 
     #region 全傳送模式 (91 點)
@@ -52,17 +79,40 @@ public class SkeletonProtocol
         JointData[] fullData = new JointData[JointCount];
         for (int i = 0; i < JointCount; i++)
         {
-            if (i < joints.Length)
-            {
-                fullData[i].position = joints[i].localPose.position;
-                fullData[i].rotation = joints[i].localPose.rotation;
-            }
-        }
+			if (i < joints.Length)
+			{
+				fullData[i].position = joints[i].localPose.position;
+				fullData[i].rotation = joints[i].localPose.rotation;
+			}
+		}
         return Serialize(fullData, JointCount);
     }
-    #endregion
 
-    private static byte[] Serialize(JointData[] joints, int count)
+	public static byte[] PackFull(ARHumanBody body, Transform[] boneTransforms)
+	{
+		var joints = body.joints;
+		JointData[] fullData = new JointData[JointCount];
+		for (int i = 0; i < JointCount; i++)
+		{
+			if (i < joints.Length)
+			{
+				if (joints[i].tracked)
+				{
+					fullData[i].position = joints[i].localPose.position;
+					fullData[i].rotation = joints[i].localPose.rotation;
+				}
+				else
+				{
+					fullData[i].position = boneTransforms[i].localPosition;
+					fullData[i].rotation = boneTransforms[i].localRotation;
+				}
+			}
+		}
+		return Serialize(fullData, JointCount);
+	}
+	#endregion
+
+	private static byte[] Serialize(JointData[] joints, int count)
     {
 		int packetSize = 4 + (count * BytesPerJoint);
         byte[] packet = new byte[packetSize];

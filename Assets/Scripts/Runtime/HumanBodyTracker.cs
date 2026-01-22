@@ -51,6 +51,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void OnHumanBodiesChanged(ARTrackablesChangedEventArgs<ARHumanBody> eventArgs)
         {
             BoneController boneController;
+            bool NeedSent = true;
 
             foreach (var humanBody in eventArgs.added)
             {
@@ -64,7 +65,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
                 boneController.InitializeSkeletonJoints();
                 boneController.ApplyBodyPose(humanBody);
-                SkeletonRootProvider.SetCurrentRoot(boneController.skeletonRoot);
+                if(NeedSent)
+                {
+					ARSkeletonSender.Instance.SendBodyData(humanBody, boneController.m_BoneMapping);
+					NeedSent = false;
+				}
+				SkeletonRootProvider.SetCurrentRoot(boneController.skeletonRoot);
             }
 
             foreach (var humanBody in eventArgs.updated)
@@ -73,7 +79,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 {
                     boneController.ApplyBodyPose(humanBody);
                     SkeletonRootProvider.SetCurrentRoot(boneController.skeletonRoot);
-                }
+					if (NeedSent)
+					{
+						ARSkeletonSender.Instance.SendBodyData(humanBody, boneController.m_BoneMapping);
+						NeedSent = false;
+					}
+				}
             }
 
             foreach (var (trackableId, _) in eventArgs.removed)
