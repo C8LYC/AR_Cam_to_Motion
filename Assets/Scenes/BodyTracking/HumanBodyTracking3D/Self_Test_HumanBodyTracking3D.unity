@@ -119,28 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &38144041 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8766024634595469697, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
-  m_PrefabInstance: {fileID: 828833085}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &38144049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38144041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b15f82cc229284894964d2d30806969d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HumanSegmentationStencilMode: 1
-  m_HumanSegmentationDepthMode: 1
-  m_EnvironmentDepthMode: 1
-  m_EnvironmentDepthTemporalSmoothing: 1
-  m_OcclusionPreferenceMode: 1
 --- !u!1 &104825517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,6 +2243,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ARF XR Origin Set Up
       objectReference: {fileID: 0}
+    - target: {fileID: 7637194992220565852, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
+      propertyPath: m_RequestedTrackingOriginMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8766024634595469703, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2276,9 +2258,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7957942351869948125, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
       insertIndex: -1
       addedObject: {fileID: 828833087}
-    - targetCorrespondingSourceObject: {fileID: 8766024634595469697, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 38144049}
   m_SourcePrefab: {fileID: 100100000, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
 --- !u!1 &828833086 stripped
 GameObject:
@@ -4369,7 +4348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   senderScript: {fileID: 1484671603}
   arSession: {fileID: 1138991436}
-  occlusionManager: {fileID: 38144049}
+  occlusionManager: {fileID: 0}
   infoText: {fileID: 186381215}
 --- !u!114 &1484671603
 MonoBehaviour:
