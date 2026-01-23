@@ -79,7 +79,12 @@ public class SkeletonProtocol
         JointData[] fullData = new JointData[JointCount];
         for (int i = 0; i < JointCount; i++)
         {
-			if (i < joints.Length)
+            if(i == 0)
+            {
+                fullData[i].position = joints[i].anchorPose.position;
+				fullData[i].rotation = joints[i].anchorPose.rotation;
+            }
+			else if (i < joints.Length)
 			{
 				fullData[i].position = joints[i].localPose.position;
 				fullData[i].rotation = joints[i].localPose.rotation;
@@ -94,7 +99,12 @@ public class SkeletonProtocol
 		JointData[] fullData = new JointData[JointCount];
 		for (int i = 0; i < JointCount; i++)
 		{
-			if (i < joints.Length)
+            if(i == 0 && joints[i].tracked)
+            {
+                fullData[i].position = joints[i].anchorPose.position;
+				fullData[i].rotation = joints[i].anchorPose.rotation;
+            }
+			else if (i < joints.Length)
 			{
 				if (joints[i].tracked)
 				{

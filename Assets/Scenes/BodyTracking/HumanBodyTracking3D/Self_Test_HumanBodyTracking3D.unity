@@ -131,14 +131,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 38144041}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b15f82cc229284894964d2d30806969d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_HumanSegmentationStencilMode: 1
   m_HumanSegmentationDepthMode: 1
-  m_EnvironmentDepthMode: 0
+  m_EnvironmentDepthMode: 1
   m_EnvironmentDepthTemporalSmoothing: 1
   m_OcclusionPreferenceMode: 1
 --- !u!1 &104825517
@@ -2273,12 +2273,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7043833920548368154, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1227141937}
-    - targetCorrespondingSourceObject: {fileID: 7043833920548368154, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1227141936}
     - targetCorrespondingSourceObject: {fileID: 7957942351869948125, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
       insertIndex: -1
       addedObject: {fileID: 828833087}
@@ -3499,45 +3493,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206003088}
   m_CullTransparentMesh: 1
---- !u!1 &1227141934 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7043833920548368154, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
-  m_PrefabInstance: {fileID: 828833085}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1227141936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227141934}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9696fcd7ad9634ccaa398f4b88c22cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  senderScript: {fileID: 1227141937}
-  arSession: {fileID: 1138991436}
-  occlusionManager: {fileID: 38144049}
-  infoText: {fileID: 186381215}
---- !u!114 &1227141937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227141934}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db2c6dd66b6274ef9b9bc70ce3818093, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pcIpAddress: 172.20.10.2
-  pcPort: 8080
-  useReducedMode: 1
-  humanBodyManager: {fileID: 828833087}
-  infoText: {fileID: 0}
-  isStart: 1
 --- !u!1 &1257095788
 GameObject:
   m_ObjectHideFlags: 0
