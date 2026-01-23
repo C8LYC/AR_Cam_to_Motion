@@ -162,9 +162,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 var bone = m_BoneMapping[i];
                 if (bone != null && joint.tracked)
                 {
-                    bone.transform.localPosition = joint.localPose.position;
-                    //bone.transform.localRotation = m_InitialRotations[i] * joint.localPose.rotation;
-                    bone.transform.localRotation = joint.localPose.rotation;
+                    if(i == 0 )
+                    {
+						bone.transform.position = joint.anchorPose.position;
+						bone.transform.rotation = joint.anchorPose.rotation;
+					}
+                    else
+                    {
+						bone.transform.localPosition = joint.localPose.position;
+						//bone.transform.localRotation = m_InitialRotations[i] * joint.localPose.rotation;
+						bone.transform.localRotation = joint.localPose.rotation;
+					}
                 }
             }
         }
