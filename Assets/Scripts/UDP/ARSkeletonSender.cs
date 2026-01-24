@@ -7,6 +7,8 @@ using System;
 using TMPro;
 using System.Text;
 
+using UnityEngine.XR.ARFoundation.Samples;
+
 public class ARSkeletonSender : MonoBehaviour
 {
     public static ARSkeletonSender Instance { get; private set; }
@@ -88,8 +90,7 @@ public class ARSkeletonSender : MonoBehaviour
             humanBodyManager.humanBodiesChanged -= OnHumanBodiesChanged;
     }
 
-    */
-
+    
     void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs eventArgs)
     {
         if (!isSending || remoteEndPoint == null) return;
@@ -148,17 +149,19 @@ public class ARSkeletonSender : MonoBehaviour
             // 使用完整的 91 個關節進行骨架同步
             packet = SkeletonProtocol.PackFull(body);
 
-            StringBuilder sb = new StringBuilder();
-
 			if (isStart)
             {
+                StringBuilder sb = new StringBuilder();
 				var joints = body.joints;
 				for (int i = 0; i < SkeletonProtocol.JointCount; i++)
 				{
-					
+					if(i == 0)
+                    {
+                        sb.AppendLine("Joint : " + i + " : " + joints[i].anchorPose.position);
+                    }
 					if (i < joints.Length)
 					{
-						sb.AppendLine("Joint : " + i + " : " + joints[i].anchorPose.position);
+						sb.AppendLine("Joint : " + i + " : " + joints[i].localPose.position);
 					}
 				}
 				isStart = false;
@@ -181,8 +184,9 @@ public class ARSkeletonSender : MonoBehaviour
                 Debug.LogWarning($"[ARSkeletonSender] UDP 發送失敗: {e.Message}");
         }
     }
+    */
 
-    public void SendBodyData(ARHumanBody body, Transform[] boneTransforms)
+    public void SendBodyData(ARHumanBody body, BoneController boneController)
     {
         if (!body.joints.IsCreated) return;
 
@@ -192,7 +196,7 @@ public class ARSkeletonSender : MonoBehaviour
         if (useReducedMode)
         {
             // 使用您指定的 14 個關鍵點進行辨識 (含 Position 與 Rotation)
-            packet = SkeletonProtocol.PackReduced(body, boneTransforms);
+            packet = SkeletonProtocol.PackReduced(body, boneController.m_BoneMapping);
 			StringBuilder sb = new StringBuilder();
 
             // Debug
@@ -215,10 +219,15 @@ public class ARSkeletonSender : MonoBehaviour
         else
         {
             // 使用完整的 91 個關節進行骨架同步
-            packet = SkeletonProtocol.PackFull(body, boneTransforms);
+            packet = SkeletonProtocol.PackFull(body, boneController);
 
             StringBuilder sb = new StringBuilder();
-
+            //sb.AppendLine("hip ancher pos : " + body.joints[0].anchorPose.position);
+            //sb.AppendLine("hip local pos : " + body.joints[0].localPose.position);
+            //sb.AppendLine("ARHumanBody Pose pos : " + body.pose.position);
+            //sb.AppendLine("boneController name : " + boneController.gameObject.name + " pos : " + boneController.transform.position);
+            var sentdata = SkeletonProtocol.UnpackFromProtocol(packet);
+            sb.AppendLine("sentdata j0 pos : " + sentdata[0].position);
             // Debug
 			if (isStart)
             {
@@ -232,8 +241,9 @@ public class ARSkeletonSender : MonoBehaviour
 					}
 				}
 				isStart = false;
-				infoText.text = sb.ToString();
+				
 			}
+            infoText.text = sb.ToString();
         }
 
         if (packet == null || packet.Length == 0) return;

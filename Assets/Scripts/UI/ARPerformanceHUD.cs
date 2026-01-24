@@ -9,7 +9,6 @@ public class ARPerformanceHUD : MonoBehaviour
     [Header("Dependencies")]
     public ARSkeletonSender senderScript; // 請拖曳你的 Sender 腳本過來
     public ARSession arSession;
-    public AROcclusionManager occlusionManager;
 
     [Header("UI Reference")]
     [Tooltip("請將場景中的 TextMeshPro UGUI 物件拖曳到這裡")]
@@ -73,28 +72,6 @@ public class ARPerformanceHUD : MonoBehaviour
         }
 
         sb.AppendLine("---------------------------");
-
-        // C. 深度相機 (LiDAR) 檢查邏輯
-        if (occlusionManager != null && occlusionManager.descriptor != null)
-        {
-            // 檢查當前深度模式
-            var depthMode = occlusionManager.currentEnvironmentDepthMode;
-            bool isLiDARActive = depthMode != EnvironmentDepthMode.Disabled;
-            
-            string depthColor = isLiDARActive ? "green" : "red";
-            sb.AppendLine($"LiDAR Support: <color={depthColor}>{depthMode}</color>");
-        }
-        else
-        {
-            sb.AppendLine("<color=red>LiDAR/Occlusion Manager Not Found</color>");
-        }
-
-        // --- 新增：人體偵測器除錯訊息 ---
-        if (occlusionManager != null && occlusionManager.subsystem != null)
-        {
-            // 檢查 ARKit 人體辨識子系統是否真的在跑
-            sb.AppendLine($"Body Subsystem: {(occlusionManager.subsystem.running ? "<color=green>Running</color>" : "<color=red>Stopped</color>")}");
-        }
 
         if (senderScript != null && senderScript.humanBodyManager != null)
         {

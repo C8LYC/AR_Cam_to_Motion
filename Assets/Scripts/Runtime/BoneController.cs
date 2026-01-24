@@ -162,7 +162,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 var bone = m_BoneMapping[i];
                 if (bone != null && joint.tracked)
                 {
-                    if(i == 0 )
+                    if(i == 0)
                     {
 						bone.transform.position = joint.anchorPose.position;
 						bone.transform.rotation = joint.anchorPose.rotation;

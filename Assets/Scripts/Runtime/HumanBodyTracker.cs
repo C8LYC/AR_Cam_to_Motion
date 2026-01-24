@@ -67,7 +67,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 boneController.ApplyBodyPose(humanBody);
                 if(NeedSent)
                 {
-					ARSkeletonSender.Instance.SendBodyData(humanBody, boneController.m_BoneMapping);
+					ARSkeletonSender.Instance.SendBodyData(humanBody, boneController);
 					NeedSent = false;
 				}
 				SkeletonRootProvider.SetCurrentRoot(boneController.skeletonRoot);
@@ -81,7 +81,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     SkeletonRootProvider.SetCurrentRoot(boneController.skeletonRoot);
 					if (NeedSent)
 					{
-						ARSkeletonSender.Instance.SendBodyData(humanBody, boneController.m_BoneMapping);
+						ARSkeletonSender.Instance.SendBodyData(humanBody, boneController);
 						NeedSent = false;
 					}
 				}

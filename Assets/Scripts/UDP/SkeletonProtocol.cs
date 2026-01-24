@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
+using UnityEngine.XR.ARFoundation.Samples;
+
 [Serializable]
 public class SkeletonProtocol
 {
@@ -93,16 +95,22 @@ public class SkeletonProtocol
         return Serialize(fullData, JointCount);
     }
 
-	public static byte[] PackFull(ARHumanBody body, Transform[] boneTransforms)
+	public static byte[] PackFull(ARHumanBody body, BoneController boneController)
 	{
 		var joints = body.joints;
 		JointData[] fullData = new JointData[JointCount];
 		for (int i = 0; i < JointCount; i++)
 		{
-            if(i == 0 && joints[i].tracked)
+            if(i == 0)
             {
-                fullData[i].position = joints[i].anchorPose.position;
-				fullData[i].rotation = joints[i].anchorPose.rotation;
+                //fullData[i].position = boneController.transform.position;
+				//fullData[i].rotation = boneController.transform.rotation;
+
+                fullData[i].position = body.pose.position;
+				fullData[i].rotation = body.pose.rotation;
+                
+                //fullData[i].position = joints[i].anchorPose.position;
+				//fullData[i].rotation = joints[i].anchorPose.rotation;
             }
 			else if (i < joints.Length)
 			{
@@ -113,8 +121,8 @@ public class SkeletonProtocol
 				}
 				else
 				{
-					fullData[i].position = boneTransforms[i].localPosition;
-					fullData[i].rotation = boneTransforms[i].localRotation;
+					fullData[i].position = boneController.m_BoneMapping[i].localPosition;
+					fullData[i].rotation = boneController.m_BoneMapping[i].localRotation;
 				}
 			}
 		}
@@ -142,5 +150,33 @@ public class SkeletonProtocol
             Buffer.BlockCopy(BitConverter.GetBytes(joints[i].rotation.w), 0, packet, offset + 24, 4);
         }
         return packet;
+    }
+
+    public static JointData[] UnpackFromProtocol(byte[] data)
+    {
+        if (data.Length < 4) return null;
+
+        // 讀取前 4 bytes 取得點數 (int)
+        int count = BitConverter.ToInt32(data, 0);
+        SkeletonProtocol.JointData[] joints = new SkeletonProtocol.JointData[count];
+        
+        int bytesPerJoint = 28; // 3 floats (pos) + 4 floats (rot)
+
+        for (int i = 0; i < count; i++)
+        {
+            int offset = 4 + (i * bytesPerJoint);
+            
+            // Position
+            joints[i].position.x = BitConverter.ToSingle(data, offset);
+            joints[i].position.y = BitConverter.ToSingle(data, offset + 4);
+            joints[i].position.z = BitConverter.ToSingle(data, offset + 8);
+
+            // Rotation
+            joints[i].rotation.x = BitConverter.ToSingle(data, offset + 12);
+            joints[i].rotation.y = BitConverter.ToSingle(data, offset + 16);
+            joints[i].rotation.z = BitConverter.ToSingle(data, offset + 20);
+            joints[i].rotation.w = BitConverter.ToSingle(data, offset + 24);
+        }
+        return joints;
     }
 }
